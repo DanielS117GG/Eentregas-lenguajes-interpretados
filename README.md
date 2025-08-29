@@ -19,6 +19,6 @@ _Mi nombre es Daniel , tengo 19 años y actualmente estudio la carrera de ingeni
 - [Steam](https://steamcommunity.com/profiles/76561199791529419/)
 
 #### Yo
-![alt text](image-3.png)
+![alt text](./ASSETS/image-3.png)
 
 git 
