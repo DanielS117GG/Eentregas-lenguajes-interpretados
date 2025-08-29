@@ -21,4 +21,3 @@ _Mi nombre es Daniel , tengo 19 años y actualmente estudio la carrera de ingeni
 #### Yo
 ![alt text](./ASSETS/image-3.png)
 
-git 
