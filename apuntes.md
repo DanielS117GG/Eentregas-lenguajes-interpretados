@@ -59,3 +59,7 @@ function sumar(a, b) {
 
 
 git add 
+git commit 
+git log
+
+( para cambios y checar quien los hizo )
