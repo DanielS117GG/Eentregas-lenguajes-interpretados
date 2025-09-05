@@ -1,0 +1,33 @@
+Comandos Basicos de Terminal 
+
+pwd = Print  Working Directory 
+
+ls - lista de los directorios  y archivos del directorio de esta terminal 
+
+ls - l lista de detalles de los directorios y archivos 
+
+ls -a lista todo tipo de directorio y archivos
+
+ls -la combinación de ambas flags 
+
+clear  - limpiar  la pantalla del terminal 
+
+cd nombre-directorio - cambiar de directorio 
+
+cd ../ - sube al directorio padre
+
+cd ../../ - subimos dos directorios padres 
+
+cd ~  - regresamos al directorio del usuario (/Users/yo)
+
+mkdir - crear un directorio
+
+touch arcchivo.txt - crea un archivo del tipo que indiques 
+
+rm - sirve para eliminar archivos 
+
+rm -r  - Eliminar el directorio 
+
+cp ruta-actual  - ruta nueva  - copiar archivos
+
+|
