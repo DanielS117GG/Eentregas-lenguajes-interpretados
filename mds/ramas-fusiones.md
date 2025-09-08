@@ -1,6 +1,7 @@
 # Asignaturas 3 DEVS
 
-<<<<<<< HEAD
+
+
 
  ## Ingles
  ### Jorge Campos 
@@ -29,4 +30,14 @@ _En esta materia se ve de igual manera los principios de diseño de los videojue
  _En esta materia estoy aprendiendo sobre la composición de las imagenes , como editarlas con distintos softwares , tambien estoy viendo como hacer estos cambios a las imagen en sus distintas capas , hasta restaurar algunas imagene en nivel basico o hacer algun fotomontaje_ 
 
   ![Dieño](../assets/dycimagen.png)
+
+
+ ## Proyecto Semestral
+
+ ### Eduardo Ignacio Guerrero Troncoso
+
+ _En esta materia estamos viendo sobre como administrar un proyecto desde 0 en este ambito , desde una planeación , hasta bocetos , diagramas más esoecificos para que el equipo tuviera la mismsa idea , me esta ayudando como planificar mejor un proyecto_
+
+ ![Proyecto_Semestral](/assets/proyectosemestral.png)
+ 
 
