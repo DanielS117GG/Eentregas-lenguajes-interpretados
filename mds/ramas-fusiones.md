@@ -1,5 +1,6 @@
 # Asignaturas 3 DEVS
 
+<<<<<<< HEAD
 
  ## Ingles
  ### Jorge Campos 
@@ -21,4 +22,11 @@
 
 _En esta materia se ve de igual manera los principios de diseño de los videojuegos desde 0, para un proyecto más ambicioso por decirlo de añguna forma , vemos distinos mmotores graficos como unreal , planeación de mapas , personajes , objetivos ,etc , tambien una parte fundamental del lore ( eso me gusta )._
  ![Principios Videojuegos](/assets/principios.png) 
+
+ ## Diseño Y Composición
+ ### Roberto Melo Ortiz D Ora
+
+ _En esta materia estoy aprendiendo sobre la composición de las imagenes , como editarlas con distintos softwares , tambien estoy viendo como hacer estos cambios a las imagen en sus distintas capas , hasta restaurar algunas imagene en nivel basico o hacer algun fotomontaje_ 
+
+  ![Dieño](../assets/dycimagen.png)
 
