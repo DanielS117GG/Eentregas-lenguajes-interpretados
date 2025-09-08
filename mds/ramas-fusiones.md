@@ -41,3 +41,9 @@ _En esta materia se ve de igual manera los principios de diseño de los videojue
  ![Proyecto_Semestral](/assets/proyectosemestral.png)
  
 
+## Lenguajes Interpretados
+### Jonatan Ulises Miranda Charles
+
+_En esta materia etoy aprendiendo muchas nuevas cosas , estoy aprendiendo lenguaje mark down , cosas nuevas en github , repositorios , cosas nuuevas en visual code , es dificil o bueno me está gustando , una vez que le agarras que good_
+
+![NuevoLenguajes](/assets/lenguajesnuevo.png)
