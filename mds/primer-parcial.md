@@ -11,7 +11,7 @@ R= _Sirve para editar archivos , moverte entre archivos , directorios , usuarios
 
 3. ¿Qué es y para qué sirve Markdown? 
 
-R=_Markdown sirve como lenguaje para paginas web en su mayoría._
+R=_Markdown sirve para agregar formato_
 
 4. ¿Qué es y para qué sirve Git?
 
