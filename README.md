@@ -26,4 +26,5 @@ _Mi nombre es Daniel , tengo 19 años y actualmente estudio la carrera de ingeni
 - [Práctica 2](mds/ramas-fusiones.md)
 - [Practica 4](mds/primer-parcial.md)
 - [Practica 6](mds/juegowebuno.md)
-[Link de Pages](https://daniels117gg.github.io/Eentregas-lenguajes-interpretados/)
+
+- [Link de Pages](https://daniels117gg.github.io/Eentregas-lenguajes-interpretados/)
