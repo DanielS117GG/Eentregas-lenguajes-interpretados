@@ -25,3 +25,4 @@ _Mi nombre es Daniel , tengo 19 años y actualmente estudio la carrera de ingeni
 - [Practica 3](./mds/etiquetas.md)
 - [Práctica 2](mds/ramas-fusiones.md)
 - [Practica 4](mds/primer-parcial.md)
+- [Practica 6](mds/juegowebuno.md)
