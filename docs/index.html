@@ -1,74 +1,223 @@
-# Dragon Web ReQuest
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Juego del Caballero</title>
+<style>
+  body, html { margin: 0; padding: 0; overflow: hidden; background: #cce0ff; font-family: Arial, sans-serif; }
+  #gameCanvas { background: #7ec850; display: block; margin: 0 auto; }
+  #scoreBoard { text-align: center; font-size: 24px; margin: 10px; }
+  #gameOverScreen { display: none; text-align: center; font-size: 28px; }
+  button { padding: 10px 20px; font-size: 20px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div id="scoreBoard">
+  Puntuación: <span id="score">0</span> | Vidas: <span id="lives">3</span> | Mejor: <span id="bestScore">0</span>
+</div>
+<canvas id="gameCanvas" width="800" height="200"></canvas>
+<div id="gameOverScreen">
+  <p>Game Over</p>
+  <button id="retryBtn">Reintentar</button>
+</div>
 
-## Lore 
+<script>
+(() => {
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  const scoreEl = document.getElementById('score');
+  const livesEl = document.getElementById('lives');
+  const bestScoreEl = document.getElementById('bestScore');
+  const gameOverScreen = document.getElementById('gameOverScreen');
+  const retryBtn = document.getElementById('retryBtn');
 
-En las tierras lejanas WEB  de el Emperador Atuma , un gran dragon de dimensiónes gigantescas llamado SyntaxError ha despertado y quiere recuperar sus tierras , el emperador ha llamado al caballero más valiente de estas tierras : Hector Matias Thomas Lopez , bien conocido como HTML , para salvar las tierras web . 
+  const groundY = 150;
+  const gravity = 0.6;
+  const initialSpeed = 4;
+  const speedIncrement = 1;
+  const speedIncreaseInterval = 100; // puntos
 
-## Reglas Y Mecanicas 
+  let speed = initialSpeed;
+  let score = 0;
+  let lives = 3;
+  let bestScore = localStorage.getItem('bestScore') || 0;
 
-### Reglas : 
+  bestScoreEl.textContent = bestScore;
 
- - El jugador controla al caballero HTML que corre automáticamente por las tierras web.
+  class Knight {
+    constructor() {
+      this.width = 40;
+      this.height = 60;
+      this.x = 50;
+      this.y = groundY - this.height;
+      this.dy = 0;
+      this.jumping = false;
+    }
+    draw() {
+      // Dibujar caballero: cuerpo simple (puedes reemplazar con imagen)
+      ctx.fillStyle = '#3a375f';
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+      // Casco
+      ctx.fillStyle = '#555';
+      ctx.fillRect(this.x + 10, this.y - 10, 20, 15);
+    }
+    update() {
+      if (this.jumping) {
+        this.dy += gravity;
+        this.y += this.dy;
+        if (this.y >= groundY - this.height) {
+          this.y = groundY - this.height;
+          this.jumping = false;
+          this.dy = 0;
+        }
+      }
+    }
+    jump() {
+      if (!this.jumping) {
+        this.jumping = true;
+        this.dy = -12;
+      }
+    }
+  }
 
-- El objetivo es saltar para esquivar enemigos y obstáculos.
+  class Fireball {
+    constructor() {
+      this.radius = 15;
+      this.x = canvas.width;
+      this.y = groundY - this.radius;
+      this.passed = false;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.fillStyle = '#ff4500';
+      ctx.shadowColor = 'orange';
+      ctx.shadowBlur = 10;
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+    update() {
+      this.x -= speed;
+    }
+  }
 
-- El jugador comienza con 3 vidas.
+  let knight = new Knight();
+  let fireballs = [];
+  let frameCount = 0;
 
-- Si el caballero toca un enemigo u obstáculo, pierde una vida.
+  function spawnFireball() {
+    let fb = new Fireball();
+    fireballs.push(fb);
+  }
 
-- Cuando se pierden las 3 vidas, el juego termina.
+  function resetGame() {
+    score = 0;
+    lives = 3;
+    speed = initialSpeed;
+    fireballs = [];
+    knight = new Knight();
+    gameOverScreen.style.display = 'none';
+    scoreEl.textContent = score;
+    livesEl.textContent = lives;
+    bestScoreEl.textContent = bestScore;
+    requestAnimationFrame(gameLoop);
+  }
 
-- La puntuación aumenta conforme avanza el tiempo (por ejemplo, cada cierto tiempo o distancia avanzada).
+  function gameOver() {
+    if (score > bestScore) {
+      bestScore = score;
+      localStorage.setItem('bestScore', bestScore);
+      bestScoreEl.textContent = bestScore;
+    }
+    gameOverScreen.style.display = 'block';
+  }
 
-- Por cada 100 puntos, la dificultad (velocidad y obstáculos) aumenta.
+  function detectCollision(rectX, rectY, rectW, rectH, circleX, circleY, radius) {
+    // Simple AABB-circular collision detection
+    let distX = Math.abs(circleX - rectX - rectW / 2);
+    let distY = Math.abs(circleY - rectY - rectH / 2);
 
-- Se guarda la puntuación más alta lograda localmente para mostrarla en futuras partidas.
+    if (distX > (rectW / 2 + radius)) { return false; }
+    if (distY > (rectH / 2 + radius)) { return false; }
 
-### Mecánicas :
+    if (distX <= (rectW / 2)) { return true; }
+    if (distY <= (rectH / 2)) { return true; }
 
-- Movimiento automático hacia la derecha del caballero.
+    let dx = distX - rectW / 2;
+    let dy = distY - rectH / 2;
+    return (dx * dx + dy * dy <= (radius * radius));
+  }
 
-- Salto para evitar colisiones con enemigos u obstáculos.
+  function update() {
+    frameCount++;
+    knight.update();
 
-- Sistema de vidas que decrementa con cada golpe.
+    if (frameCount % 90 === 0) spawnFireball();
 
-- Incremento progresivo de la velocidad y dificultad conforme aumenta el puntaje.
+    fireballs.forEach((fb, index) => {
+      fb.update();
 
-- Al terminar el juego, se compara la puntuación actual con el récord guardado y se actualiza si se supera.
+      if (!fb.passed && fb.x + fb.radius < knight.x) {
+        fb.passed = true;
+        score++;
+        scoreEl.textContent = score;
 
+        if (score % speedIncreaseInterval === 0) {
+          speed += speedIncrement;
+        }
+      }
 
-### Algoritmo : 
+      if (detectCollision(knight.x, knight.y, knight.width, knight.height, fb.x, fb.y, fb.radius)) {
+        fireballs.splice(index, 1);
+        lives--;
+        livesEl.textContent = lives;
+        if (lives <= 0) {
+          cancelAnimationFrame(animationId);
+          gameOver();
+        }
+      }
 
-1. Inicializar variables: vidas = 3, puntuación = 0, velocidad_inicial, mejor_puntuacion (cargar de localStorage).
+      if (fb.x + fb.radius < 0) {
+        fireballs.splice(index, 1);
+      }
+    });
+  }
 
-2. Mostrar caballero y fondo de tierras web.
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-3. Mientras vidas > 0:
+    // Tierra plana
+    ctx.fillStyle = '#654321';
+    ctx.fillRect(0, groundY, canvas.width, canvas.height - groundY);
 
-4. Mover caballero automáticamente hacia la derecha a velocidad actual.
+    knight.draw();
 
-5. Incrementar puntuación con el tiempo.
+    fireballs.forEach(fb => fb.draw());
+  }
 
-6. Cada 100 puntos, aumentar la velocidad y dificultad.
+  let animationId;
+  function gameLoop() {
+    update();
+    draw();
+    if (lives > 0) {
+      animationId = requestAnimationFrame(gameLoop);
+    }
+  }
 
-7. Detectar si el jugador presiona la tecla salto.
+  // Control de salto con teclado (espacio o flecha arriba)
+  window.addEventListener('keydown', e => {
+    if ((e.code === 'Space' || e.code === 'ArrowUp') && lives > 0) {
+      knight.jump();
+    }
+  });
 
-8. Si se presiona salto y el caballero está en tierra, hacer que salte.
+  retryBtn.addEventListener('click', () => {
+    resetGame();
+  });
 
-9. Generar y mover enemigos y obstáculos a la derecha hacia la izquierda.
-
-10. Detectar colisiones del caballero con enemigos/obstáculos.
-
-11. Si hay colisión, restar 1 vida.
-
-12. Cuando vidas = 0:
-
-13. Comparar puntuación actual con mejor_puntuacion.
-
-14. Si puntuación actual > mejor_puntuacion, actualizar mejor_puntuacion y guardar en localStorage.
-
-15. Mostrar pantalla de "Juego Terminado" con la puntuación y mejor puntuación.
-
-16. Fin.
-
-![Flujo del juego](../ASSETS/FlujoJuegoWeb.png)
+  // Inicio juego
+  resetGame();
+})();
+</script>
+</body>
+</html>

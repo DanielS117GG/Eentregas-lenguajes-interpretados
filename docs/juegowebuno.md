@@ -72,3 +72,11 @@ En las tierras lejanas WEB  de el Emperador Atuma , un gran dragon de dimensión
 16. Fin.
 
 ![Flujo del juego](../ASSETS/FlujoJuegoWeb.png)
+
+
+### Prompt para la IA :
+
+_Me podrías dar el código en HTML para que lo ponga en mi página de GitHub y ya cuando abra la página se ejecute ... 
+recuerda que es un caballero que corre por una tierra plana saltando bolas de fuego , cada 100 puntos aumenta el ritmo , tienes 3 vidas y a la última game over , el score es Como el de el dinosaurio de Google cuando no tienes internet , se guarda la puntuación más alta y al final aparece un botón de reintentar._
+
+[Conversación con Luz](https://www.perplexity.ai/search/luz-te-acuerdas-de-mi-juego-we-01sWrB1eTE.XfBjWswppRA#0)
